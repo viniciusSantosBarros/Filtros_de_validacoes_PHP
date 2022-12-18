@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtros de validação PHP</title>
+
+    <style>
+
+        form{
+            padding: 115px;
+        }
+
+        body{
+            background-image: linear-gradient(aliceblue , transparent 500px);
+            background-attachment: fixed;
+        }
+        
+        h1{
+            text-align:center;
+            margin:50px;
+        }
+
+        input{
+            margin-bottom: 15px;
+        }
+
+        fieldset{
+            margin-top:500px;
+            text-align:center;
+            margin:auto;
+            width:400px;
+            border-radius:10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Filtros de validação PHP</h1>
+    <hr>
+
+    <form action="#" method="POST">
+        <fieldset> <legend>Dados Usuário</legend>
+            <label for="nome">Nome:</label> <input type="text" name="nome" size="20" id="nome" placeholder="Nome completo"> <br>
+            <label for="email">Email:</label> <input type="text" name="email" id="email" size="20" placeholder="Digite seu email"> <br>
+            <label for="idade">Idade:</label> <input type="text" name="idade" size="20" id="idade" placeholder="Digite sua idade"> <br>
+            <label for="altura">Altura:</label> <input type="text" name="altura" size="20" id="altura" placeholder="Digite sua altura"> <br>
+            <label for="url">URL:</label> <input type="text" name="url" size="20" id="url" placeholder="Digite a URl"> <br>
+            <input type="submit" name="submit" value="Enviar">
+        </fieldset>
+    </form>
+
+    <?php
+    
+    if(isset($_POST['submit'])){
+        
+        $email = $_POST['email'];
+        $idade = $_POST['idade'];
+        $altura = $_POST['altura'];
+        $url = $_POST['url'];
+       
+
+          // Validação Filtro do tipo Email
+          if($email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)){
+            echo 'Email cadastrado com sucesso! <br>';
+          } else{
+            echo 'Email invalido. <br>';
+          }
+          
+          // Validação Filtro do tipo Int
+          if($idade = filter_input(INPUT_POST, 'idade', FILTER_VALIDATE_INT)){
+            echo 'Idade cadastrada com sucesso! <br>';
+          } else{
+            echo 'Idade invalida. <br>';
+          }
+          
+          // Validação Filtro do tipo Float
+          if($altura = filter_input(INPUT_POST, 'altura', FILTER_VALIDATE_FLOAT)){
+            echo 'Altura cadastrada com sucesso! <br>';
+          } else{
+            echo 'Altura invalida. <br>';
+          }
+          
+          // Validação Filtro do tipo URL
+          if($url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)){
+            echo 'URL cadastrada com sucesso! <br>';
+          } else{
+            echo 'URL invalida. <br>';
+          }
+    }
+
+    ?>
+   
+</body>
+</html>
